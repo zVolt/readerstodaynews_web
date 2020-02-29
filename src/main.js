@@ -5,8 +5,17 @@ import router from './router'
 import store from './store'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faCircle, faHammer } from '@fortawesome/free-solid-svg-icons'
+import { faFacebookSquare, faTwitterSquare } from '@fortawesome/free-brands-svg-icons'
+import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome'
+
+library.add(faFacebookSquare, faTwitterSquare, faCircle, faHammer)
+
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+Vue.component('font-awesome-layers', FontAwesomeLayers)
+
+import './custom.scss'
 
 Vue.config.productionTip = false
 
