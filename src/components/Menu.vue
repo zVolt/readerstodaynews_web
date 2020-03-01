@@ -36,3 +36,42 @@
     </b-collapse>
   </b-navbar>
 </template>
+
+<script>
+
+export default {
+  data() {
+    return {
+      main_menu: [],
+      sec_menu: []
+    };
+  },
+  mounted(){
+    this.get_menu_items()
+  },
+  methods: {
+    get_menu_items: function() {
+      var vm = this;
+      this.axios.get("/menu/?format=json").then(
+        response => {
+          var all_items = response.data.results;
+          all_items.forEach(item => {
+            if (item.url === window.location.pathname) {
+              item.active = true;
+            }
+            if (item.menu == 0) {
+              vm.main_items.push(item);
+            } else {
+              vm.sec_items.push(item);
+            }
+          });
+        },
+        error => {
+          // eslint-disable-next-line
+          console.log(error);
+        }
+      );
+    }
+  }
+};
+</script>

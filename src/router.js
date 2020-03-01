@@ -14,8 +14,8 @@ export default new Router({
       component: Home
     },
     {
-      path: '/home',
-      name: 'home',
+      path: '/post',
+      name: 'post',
       component: () => import(/* webpackChunkName: "about" */ './pages/Home.vue')
     }
   ]

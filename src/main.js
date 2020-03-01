@@ -1,5 +1,7 @@
 import '@babel/polyfill'
 import Vue from 'vue'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 import App from './App.vue'
 import router from './router'
 import store from './store'
@@ -10,11 +12,6 @@ import { faCircle, faHammer } from '@fortawesome/free-solid-svg-icons'
 import { faFacebookSquare, faTwitterSquare } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome'
 
-library.add(faFacebookSquare, faTwitterSquare, faCircle, faHammer)
-
-Vue.component('font-awesome-icon', FontAwesomeIcon)
-Vue.component('font-awesome-layers', FontAwesomeLayers)
-
 import './custom.scss'
 
 Vue.config.productionTip = false
@@ -23,6 +20,13 @@ Vue.config.productionTip = false
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
+
+Vue.use(VueAxios, axios)
+Vue.axios.baseURL = 'https://readersapi.herokuapp.com/api/'
+// font-awesome icons
+library.add(faFacebookSquare, faTwitterSquare, faCircle, faHammer)
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+Vue.component('font-awesome-layers', FontAwesomeLayers)
 
 new Vue({
   router,
