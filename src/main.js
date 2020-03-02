@@ -22,7 +22,10 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
 Vue.use(VueAxios, axios)
-Vue.axios.baseURL = 'https://readersapi.herokuapp.com/api/'
+Vue.axios.defaults.baseURL = 'https://readersapi.herokuapp.com/api/'
+Vue.axios.defaults.params = {}
+axios.defaults.params['format'] = 'json'
+
 // font-awesome icons
 library.add(faFacebookSquare, faTwitterSquare, faCircle, faHammer)
 Vue.component('font-awesome-icon', FontAwesomeIcon)

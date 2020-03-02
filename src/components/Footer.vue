@@ -32,13 +32,39 @@
           <font-awesome-icon size="3x" :icon="['fab', 'twitter-square']" color="twitter" />
         </a>
       </b-col>
-      <b-col md="2">
-        <p class="badge badge-danger text-wrap">87334534</p>
-        <p>Visited</p>
+      <b-col md="2" class="divider">
+        <div class="badge badge-danger text-wrap">
+          {{this.count}}
+          <br/>Visitors
+        </div>
       </b-col>
     </b-row>
   </b-container>
 </template>
+
+<script>
+export default {
+  data(){
+    return {
+      count: 28375834
+    }
+  },
+  mounted(){
+    this.fetch_count()
+  },
+  methods: {
+    fetch_count(){
+      this.axios.get('visitorscount').then(response=>{
+        //eslint-disable-next-line
+        console.log(response)
+      }, error => {
+        //eslint-disable-next-line
+        console.log(error)
+      })
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 ul {
@@ -71,11 +97,8 @@ ul {
   }
 }
 .divider{
-  border-right-width: 1px;
-  border-right-color: white;
-  border-right-style: groove;
-}
-#footer{
-  
+  border-left-width: 1px;
+  border-left-color: white;
+  border-left-style: groove;
 }
 </style>
