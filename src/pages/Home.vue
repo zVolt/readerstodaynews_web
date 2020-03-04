@@ -1,7 +1,15 @@
 <template>
   <base-layout>
-    <b-container class="text-center pt-5 mt-5">
-      <b-card-group deck>
+    <b-carousel id="carousel-1" background="#ababab" style="text-shadow: 1px 1px 2px #333;">
+      <b-carousel-slide
+        caption-tag='h1'
+        caption="Reader Today News"
+        img-src="https://picsum.photos/1024/320/?image=52"
+      ></b-carousel-slide>
+    </b-carousel>
+
+    <b-container fluid="md">
+      <b-card-group columns>
         <post v-for="post in posts" :key="post.id" :post="post"></post>
       </b-card-group>
     </b-container>
@@ -10,34 +18,37 @@
 
 <script>
 import BaseLayout from "../layouts/Base";
-import Post from '../components/Post'
+import Post from "../components/Post";
 export default {
   name: "home",
   components: {
     BaseLayout,
     Post
   },
-  data(){
+  data() {
     return {
       posts: []
-    }
+    };
   },
-  mounted(){
+  mounted() {
     this.fetch_posts();
   },
   methods: {
-    fetch_posts(){
+    fetch_posts() {
       var vm = this;
-      this.axios.get('post/list').then(response=>{
-        //eslint-disable-next-line
-        console.log(response);
-        response.data.results.forEach(post => {
-          vm.posts.push(post)
-        });
-      }, error=>{
-        //eslint-disable-next-line
-        console.log(error);
-      })
+      this.axios.get("post/list").then(
+        response => {
+          //eslint-disable-next-line
+          console.log(response);
+          response.data.results.forEach(post => {
+            vm.posts.push(post);
+          });
+        },
+        error => {
+          //eslint-disable-next-line
+          console.log(error);
+        }
+      );
     }
   }
 };

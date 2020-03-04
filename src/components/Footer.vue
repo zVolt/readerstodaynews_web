@@ -1,5 +1,5 @@
 <template>
-  <b-container class="bg-dark text-light p-5" id="footer" fluid>
+  <b-container class="bg-dark text-light p-md-5" id="footer" fluid>
     <b-row class="p-5">
       <b-col md="2" class="divider">
         <h5 class="text-white">About</h5>
@@ -26,10 +26,10 @@
       <b-col md="6" class="divider">
         <h5 class="text-white">Readers Today News</h5>
         <a href="#" class="social facebook">
-            <font-awesome-icon size="3x" :icon="['fab', 'facebook-square']" />
+            <font-awesome-icon size="2x" :icon="['fab', 'facebook-square']" />
         </a>
         <a href="#" class="social twitter">
-          <font-awesome-icon size="3x" :icon="['fab', 'twitter-square']" color="twitter" />
+          <font-awesome-icon size="2x" :icon="['fab', 'twitter-square']" color="twitter" />
         </a>
       </b-col>
       <b-col md="2" class="divider">
@@ -82,7 +82,7 @@ ul {
 }
 .social {
   text-decoration: none;
-  margin-right: 10px;
+  margin-right: 5px;
 }
 .twitter {
   color: #00acee;

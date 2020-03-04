@@ -11,6 +11,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCircle, faHammer } from '@fortawesome/free-solid-svg-icons'
 import { faFacebookSquare, faTwitterSquare } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome'
+import moment from 'vue-moment';
 
 import './custom.scss'
 
@@ -20,9 +21,10 @@ Vue.config.productionTip = false
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
-
+Vue.use(moment)
 Vue.use(VueAxios, axios)
-Vue.axios.defaults.baseURL = 'https://readersapi.herokuapp.com/api/'
+
+Vue.axios.defaults.baseURL = 'http://localhost:8000/api/'
 Vue.axios.defaults.params = {}
 axios.defaults.params['format'] = 'json'
 
