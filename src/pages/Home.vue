@@ -2,9 +2,7 @@
   <base-layout>
     <b-carousel id="carousel-1" background="#ababab" style="text-shadow: 1px 1px 2px #333;">
       <b-carousel-slide
-        caption-tag='h1'
-        caption="Reader Today News"
-        img-src="https://picsum.photos/1024/320/?image=52"
+        img-src="https://res.cloudinary.com/readerstodaymedia/image/upload/v1583398982/web_images/header.jpg"
       ></b-carousel-slide>
     </b-carousel>
 
