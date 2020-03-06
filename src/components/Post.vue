@@ -1,6 +1,6 @@
 <template>
   <b-card class="m-3" no-body>
-    <b-card-img-lazy :src="post.media_items[0].image" />
+    <b-card-img-lazy v-if="is_media_available" :src="get_post_image()" />
     <b-card-body>
       <b-card-title>{{post.title}}</b-card-title>
       <small>Published {{post.last_modified_on | moment("from", "now") }}</small>
@@ -16,6 +16,17 @@
 export default {
   props: {
     post: Object
+  },
+  computed: {
+    is_media_available() {
+      return this.post.media_items.length > 0;
+    }
+  },
+  methods: {
+    get_post_image() {
+      if (this.post.media_items.length > 0)
+        return this.post.media_items[0].image;
+    }
   }
 };
 </script>
