@@ -5,6 +5,8 @@ import VueAxios from 'vue-axios'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import { firestorePlugin } from 'vuefire'
+
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -23,6 +25,8 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 Vue.use(moment)
 Vue.use(VueAxios, axios)
+Vue.use(firestorePlugin)
+
 
 Vue.axios.defaults.baseURL = 'http://localhost:8000/api/'
 Vue.axios.defaults.params = {}
