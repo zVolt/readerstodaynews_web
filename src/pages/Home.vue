@@ -1,8 +1,9 @@
 <template>
   <base-layout>
-    <b-carousel id="carousel-1" background="#ababab" style="text-shadow: 1px 1px 2px #333;">
+    <b-carousel id="carousel-1" background="#ababab">
       <b-carousel-slide
         img-src="https://res.cloudinary.com/readerstodaymedia/image/upload/v1583398982/web_images/header.jpg"
+        img-height="50px"
       ></b-carousel-slide>
     </b-carousel>
 
@@ -14,7 +15,7 @@
         </b-col>
         <b-col sm="12" md="10">
           <b-card-group columns>
-            <post v-for="post in posts" :key="post.id" :post="post"></post>
+            <post v-for="post in posts" :key="post.id" :post="post" />
           </b-card-group>
         </b-col>
       </b-row>
@@ -46,9 +47,9 @@ export default {
   methods: {
     fetch_categories() {
       var vm = this;
-      this.axios.get("tag/list").then(
+      this.axios.get("category/").then(
         response => {
-          response.data.forEach(item => {
+          response.data.results.forEach(item => {
             vm.categories.push(item);
           });
         },
@@ -60,7 +61,7 @@ export default {
     },
     fetch_posts() {
       var vm = this;
-      this.axios.get("post/list").then(
+      this.axios.get("post/").then(
         response => {
           response.data.results.forEach(post => {
             vm.posts.push(post);

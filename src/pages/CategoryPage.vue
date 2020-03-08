@@ -1,14 +1,18 @@
 <template>
-  <b-card-group columns>
-    <post v-for="post in posts" :key="post.id" :post="post" />
-  </b-card-group>
+  <base-layout>
+    <b-card-group columns>
+      <post v-for="post in posts" :key="post.id" :post="post" />
+    </b-card-group>
+  </base-layout>
 </template>
 
 <script>
+import BaseLayout from "../layouts/Base";
 import Post from "../components/Post";
 export default {
   components: {
-    Post
+    Post,
+    BaseLayout
   },
   data() {
     return {
@@ -30,8 +34,6 @@ export default {
       var vm = this;
       this.axios.get("/category/" + this.category_name).then(
         response => {
-          //eslint-disable-next-line
-          console.log(response);
           vm.category = response;
         },
         error => {
@@ -44,8 +46,6 @@ export default {
       var vm = this;
       this.axios.get("/post/?categories__name=" + this.category_name).then(
         response => {
-          //eslint-disable-next-line
-          console.log(response);
           response.data.results.forEach(post => {
             vm.posts.push(post);
           });

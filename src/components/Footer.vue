@@ -26,7 +26,7 @@
       <b-col md="6" class="divider">
         <h5 class="text-white">Readers Today News</h5>
         <a href="#" class="social facebook">
-            <font-awesome-icon size="2x" :icon="['fab', 'facebook-square']" />
+          <font-awesome-icon size="2x" :icon="['fab', 'facebook-square']" />
         </a>
         <a href="#" class="social twitter">
           <font-awesome-icon size="2x" :icon="['fab', 'twitter-square']" color="twitter" />
@@ -35,7 +35,7 @@
       <b-col md="2" class="divider">
         <div class="badge badge-danger text-wrap">
           {{this.count}}
-          <br/>Visitors
+          <br />Visitors
         </div>
       </b-col>
     </b-row>
@@ -44,26 +44,29 @@
 
 <script>
 export default {
-  data(){
+  data() {
     return {
       count: 28375834
-    }
+    };
   },
-  mounted(){
-    this.fetch_count()
+  mounted() {
+    this.fetch_count();
   },
   methods: {
-    fetch_count(){
-      this.axios.get('visitorscount').then(response=>{
-        //eslint-disable-next-line
-        console.log(response)
-      }, error => {
-        //eslint-disable-next-line
-        console.log(error)
-      })
+    fetch_count() {
+      var vm = this;
+      this.axios.get("counter/website").then(
+        response => {
+          vm.count = response.data.count;
+        },
+        error => {
+          //eslint-disable-next-line
+          console.log(error);
+        }
+      );
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -91,12 +94,12 @@ ul {
   }
 }
 .facebook {
-  color: #4267B2;
+  color: #4267b2;
   :hover {
-    color: lighten(#4267B2, 5%);
+    color: lighten(#4267b2, 5%);
   }
 }
-.divider{
+.divider {
   border-left-width: 1px;
   border-left-color: white;
   border-left-style: groove;
