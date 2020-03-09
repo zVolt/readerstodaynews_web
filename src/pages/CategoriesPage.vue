@@ -21,7 +21,7 @@ export default {
       this.axios.get("/category").then(
         response => {
           response.data.results.forEach(cat => {
-            vm.push(cat);
+            vm.categories.push(cat);
           });
         },
         error => {

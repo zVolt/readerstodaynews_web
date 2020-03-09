@@ -8,8 +8,8 @@ import store from './store'
 import numeral from 'numeral';
 import numFormat from 'vue-filter-number-format';
 import vueHeadful from 'vue-headful';
-import * as firebase from "firebase";
-import * as firebaseui from "firebaseui";
+import firebase from "firebase/app";
+import * as firebaseui from 'firebaseui'
 import 'firebase/firestore';
 import 'firebase/auth';
 

@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './pages/Home'
+import CategoriesPage from './pages/CategoriesPage'
 import CategoryPage from './pages/CategoryPage'
 import PostPage from './pages/PostPage'
+import AboutPage from './pages/AboutPage'
 
 Vue.use(Router)
 
@@ -34,11 +36,16 @@ export default new Router({
       name: 'post_by_slug',
       component: PostPage
     },
-    // {
-    //   path: '/category/',
-    //   name: 'categories',
-    //   component: CategoriesPage
-    //   component: () => import(/* webpackChunkName: "about" */ './pages/Home.vue')
-    // }
+    {
+      path: '/about',
+      name: 'about',
+      component: AboutPage
+    },
+    {
+      path: '/categories/',
+      name: 'categories',
+      component: CategoriesPage
+      // component: () => import(/* webpackChunkName: "about" */ './pages/Home.vue')
+    }
   ]
 })

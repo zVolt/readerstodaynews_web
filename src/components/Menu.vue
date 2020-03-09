@@ -6,6 +6,9 @@
 
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
+        <b-nav-item to="/">Home</b-nav-item>
+        <b-nav-item to="/categories">Categories</b-nav-item>
+        <b-nav-item to="/about">About</b-nav-item>
         <b-nav-item v-bind:key="item.id" :to="item.url" v-for="item in main_menu">{{item.name}}</b-nav-item>
       </b-navbar-nav>
 
@@ -88,7 +91,8 @@ export default {
         signInSuccessUrl: this.$route.path,
         signInOptions: [
           firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-          firebase.auth.EmailAuthProvider.PROVIDER_ID
+          firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+          firebase.auth.TwitterAuthProvider.PROVIDER_ID
         ]
       };
       auth_ui.start("#firebaseui-auth-container", uiConfig);

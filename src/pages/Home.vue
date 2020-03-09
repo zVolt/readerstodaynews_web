@@ -13,9 +13,15 @@
 
     <b-container fluid="md">
       <b-row>
-        <b-col md="2" class="d-sm-none d-md-block">
-          <h4>Top Categories</h4>
-          <category v-for="cat in categories" :key="cat.id" :category="cat"></category>
+        <b-col md="2" class="d-sm-none d-md-block mt-4">
+          <h5>Top Categories</h5>
+          <b-list-group>
+            <b-list-group-item
+              v-for="cat in categories"
+              :key="cat.id"
+              :to="'/category/'+ cat.name"
+            >{{cat.name}}</b-list-group-item>
+          </b-list-group>
         </b-col>
         <b-col sm="12" md="10">
           <b-card-group columns>
@@ -30,13 +36,12 @@
 <script>
 import BaseLayout from "../layouts/Base";
 import Post from "../components/Post";
-import Category from "../components/Category";
+// import Category from "../components/Category";
 export default {
   name: "home",
   components: {
     BaseLayout,
-    Post,
-    Category
+    Post
   },
   data() {
     return {
