@@ -13,7 +13,16 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
+      meta: {
+        title: 'Readers Today News',
+        metaTags: [
+          {
+            name: 'description',
+            content: 'home page of Readers Today News.'
+          },
+        ]
+      },
     },
     {
       path: '/category/:category_name',

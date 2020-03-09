@@ -7,7 +7,9 @@ import router from './router'
 import store from './store'
 import numeral from 'numeral';
 import numFormat from 'vue-filter-number-format';
-import firebase from 'firebase/app'
+import vueHeadful from 'vue-headful';
+import * as firebase from "firebase";
+import * as firebaseui from "firebaseui";
 import 'firebase/firestore';
 import 'firebase/auth';
 
@@ -44,13 +46,28 @@ axios.defaults.params['format'] = 'json'
 library.add(faFacebookSquare, faTwitterSquare, faCircle, faHammer)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('font-awesome-layers', FontAwesomeLayers)
+Vue.component('vue-headful', vueHeadful);
 
 firebase.initializeApp(config);
 
 export const db = firebase.firestore()
+export const auth_ui = new firebaseui.auth.AuthUI(firebase.auth())
+
+firebase.auth().onAuthStateChanged(user => {
+  store.dispatch("fetchUser", user);
+  if (user) {
+    db.collection("users")
+      .doc(user.uid)
+      .set(store.getters.user);
+  }
+});
 
 new Vue({
   router,
   store,
   render: h => h(App),
+  mounted() {
+    //eslint-disable-next-line
+    console.log(firebase.auth().currentUser)
+  }
 }).$mount('#app')

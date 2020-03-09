@@ -28,7 +28,7 @@
         <div>
           <b-form-textarea v-model="comment_text" placeholder="Add your thoughts?"></b-form-textarea>
           <br />
-          <b-button type="submit" variant="success">Send</b-button>
+          <b-button type="submit" variant="success" @click="sumbit_comment">Send</b-button>
         </div>
       </template>
       <template v-else>
@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import * as firebase from "firebase";
 import { db } from "../main";
 import { mapGetters } from "vuex";
 export default {
@@ -46,6 +47,7 @@ export default {
   data() {
     return {
       comment_text: "",
+      comment_disable: false,
       comments: []
     };
   },
@@ -77,6 +79,26 @@ export default {
           else comment.likes.splice(index, 1);
         }
       });
+    },
+    sumbit_comment() {
+      var new_comment = {
+        body: this.comment_text,
+        author: db.collection("users").doc(this.user.id),
+        last_updated_on: firebase.firestore.FieldValue.serverTimestamp(),
+        likes: []
+      };
+      db.collection("comments")
+        .doc(this.post_id)
+        .collection("comments")
+        .add(new_comment)
+        .then(() => {
+          this.comment_text = "";
+        })
+        .catch(error => {
+          // raise a toast
+          //eslint-disable-next-line
+          console.log(error);
+        });
     }
   }
 };

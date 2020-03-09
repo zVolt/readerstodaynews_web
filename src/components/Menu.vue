@@ -41,11 +41,9 @@
 
 <script>
 import * as firebase from "firebase";
-import * as firebaseui from "firebaseui";
 import { mapGetters } from "vuex";
-import store from "../store";
 import * as md5 from "js-md5";
-import { db } from "../main";
+import { auth_ui } from "../main";
 export default {
   data() {
     return {
@@ -54,14 +52,6 @@ export default {
     };
   },
   mounted() {
-    firebase.auth().onAuthStateChanged(user => {
-      store.dispatch("fetchUser", user);
-      if (user) {
-        db.collection("users")
-          .doc(user.uid)
-          .set(this.user);
-      }
-    });
     this.get_menu_items();
   },
   computed: {
@@ -94,14 +84,14 @@ export default {
     },
     start_login() {
       var uiConfig = {
+        signInFlow: "popup",
         signInSuccessUrl: this.$route.path,
         signInOptions: [
           firebase.auth.GoogleAuthProvider.PROVIDER_ID,
           firebase.auth.EmailAuthProvider.PROVIDER_ID
         ]
       };
-      var ui = new firebaseui.auth.AuthUI(firebase.auth());
-      ui.start("#firebaseui-auth-container", uiConfig);
+      auth_ui.start("#firebaseui-auth-container", uiConfig);
     },
     sign_out() {
       firebase.auth().signOut();
