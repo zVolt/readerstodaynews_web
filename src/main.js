@@ -38,7 +38,7 @@ Vue.use(firestorePlugin)
 
 Vue.filter('numFormat', numFormat(numeral))
 
-Vue.axios.defaults.baseURL = 'http://localhost:8000/api/'
+Vue.axios.defaults.baseURL = 'https://readersapi.herokuapp.com/api/'
 Vue.axios.defaults.params = {}
 axios.defaults.params['format'] = 'json'
 
