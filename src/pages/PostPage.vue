@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import BaseLayout from "../layouts/Base";
-import Comments from "../components/Comments";
+import BaseLayout from "@/layouts/Base";
+import Comments from "@/components/Comments";
 
 export default {
   components: {

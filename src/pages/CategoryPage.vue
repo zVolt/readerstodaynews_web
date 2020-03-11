@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import BaseLayout from "../layouts/Base";
-import Post from "../components/Post";
+import BaseLayout from "@/layouts/Base";
+import Post from "@/components/Post";
 export default {
   components: {
     Post,

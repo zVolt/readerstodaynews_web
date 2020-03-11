@@ -38,7 +38,7 @@ export default new Vuex.Store({
         id: user.uid,
         name: user.displayName,
         email: user.email,
-        image: user.photoURL
+        image: user.photoURL,
       })
     }
   }

@@ -46,7 +46,7 @@
 import * as firebase from "firebase";
 import { mapGetters } from "vuex";
 import * as md5 from "js-md5";
-import { auth_ui } from "../main";
+import { auth_ui } from "@/main";
 export default {
   data() {
     return {

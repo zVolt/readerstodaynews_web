@@ -3,7 +3,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import App from './App.vue'
-import router from './router'
+
 import store from './store'
 import numeral from 'numeral';
 import numFormat from 'vue-filter-number-format';
@@ -37,7 +37,7 @@ Vue.use(firestorePlugin)
 
 Vue.filter('numFormat', numFormat(numeral))
 
-Vue.axios.defaults.baseURL = 'https://readersapi.herokuapp.com/api/'
+Vue.axios.defaults.baseURL = 'http://localhost:8000/api/'
 Vue.axios.defaults.params = {}
 axios.defaults.params['format'] = 'json'
 
@@ -56,16 +56,14 @@ firebase.auth().onAuthStateChanged(user => {
   if (user) {
     db.collection("users")
       .doc(user.uid)
-      .set(store.getters.user);
+      .set(store.getters.user, { merge: true });
   }
 });
+
+import router from './router'
 
 new Vue({
   router,
   store,
-  render: h => h(App),
-  mounted() {
-    //eslint-disable-next-line
-    console.log(firebase.auth().currentUser)
-  }
+  render: h => h(App)
 }).$mount('#app')

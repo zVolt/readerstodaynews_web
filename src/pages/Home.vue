@@ -30,8 +30,8 @@
 </template>
 
 <script>
-import BaseLayout from "../layouts/Base";
-import Post from "../components/Post";
+import BaseLayout from "@/layouts/Base";
+import Post from "@/components/Post";
 // import Category from "../components/Category";
 export default {
   name: "home",
