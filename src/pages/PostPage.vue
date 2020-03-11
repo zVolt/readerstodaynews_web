@@ -8,7 +8,6 @@
         </div>
       </template>
       <template v-else>
-        <vue-headful title="Reader Today News" :description="post.title" />
         <h2>{{post.title}}</h2>
         <small>Published {{post.last_modified_on | moment("from", "now")}}</small>
         <b-badge v-for="cat in post.categories" :key="cat.id" :to="'/category/' + cat.name" />

@@ -7,7 +7,6 @@ import router from './router'
 import store from './store'
 import numeral from 'numeral';
 import numFormat from 'vue-filter-number-format';
-import vueHeadful from 'vue-headful';
 import firebase from "firebase/app";
 import * as firebaseui from 'firebaseui'
 import 'firebase/firestore';
@@ -46,7 +45,6 @@ axios.defaults.params['format'] = 'json'
 library.add(faFacebookSquare, faTwitterSquare, faCircle, faHammer)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('font-awesome-layers', FontAwesomeLayers)
-Vue.component('vue-headful', vueHeadful);
 
 firebase.initializeApp(config);
 
