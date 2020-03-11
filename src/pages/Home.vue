@@ -1,9 +1,5 @@
 <template>
   <base-layout>
-    <vue-headful
-      title="Readers Today News"
-      description="Reader Today News is a leading/reliable news source"
-    />
     <b-carousel id="carousel-1" background="#ababab">
       <b-carousel-slide
         img-src="https://res.cloudinary.com/readerstodaymedia/image/upload/v1583398982/web_images/header.jpg"
