@@ -63,7 +63,7 @@
 
 <script>
 import * as firebase from "firebase";
-import { db } from "../main";
+import { db } from "@/main";
 import { mapGetters } from "vuex";
 export default {
   props: ["post_id"],

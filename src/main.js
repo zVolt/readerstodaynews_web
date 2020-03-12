@@ -3,7 +3,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import App from './App.vue'
-import router from './router'
+
 import store from './store'
 import numeral from 'numeral';
 import numFormat from 'vue-filter-number-format';
@@ -17,7 +17,7 @@ import { firestorePlugin } from 'vuefire'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCircle, faHammer } from '@fortawesome/free-solid-svg-icons'
+import { faCircle, faHammer, faNewspaper } from '@fortawesome/free-solid-svg-icons'
 import { faFacebookSquare, faTwitterSquare } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome'
 import moment from 'vue-moment';
@@ -37,12 +37,12 @@ Vue.use(firestorePlugin)
 
 Vue.filter('numFormat', numFormat(numeral))
 
-Vue.axios.defaults.baseURL = 'https://readersapi.herokuapp.com/api/'
+Vue.axios.defaults.baseURL = process.env.VUE_APP_API_BACKEND_BASE_URL
 Vue.axios.defaults.params = {}
 axios.defaults.params['format'] = 'json'
 
 // font-awesome icons
-library.add(faFacebookSquare, faTwitterSquare, faCircle, faHammer)
+library.add(faFacebookSquare, faTwitterSquare, faCircle, faHammer, faNewspaper)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('font-awesome-layers', FontAwesomeLayers)
 
@@ -56,16 +56,14 @@ firebase.auth().onAuthStateChanged(user => {
   if (user) {
     db.collection("users")
       .doc(user.uid)
-      .set(store.getters.user);
+      .set(store.getters.user, { merge: true });
   }
 });
+
+import router from './router'
 
 new Vue({
   router,
   store,
-  render: h => h(App),
-  mounted() {
-    //eslint-disable-next-line
-    console.log(firebase.auth().currentUser)
-  }
+  render: h => h(App)
 }).$mount('#app')

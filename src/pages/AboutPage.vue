@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import BaseLayout from "../layouts/Base";
+import BaseLayout from "@/layouts/Base";
 export default {
   components: {
     BaseLayout

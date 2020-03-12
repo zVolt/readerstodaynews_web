@@ -1,14 +1,24 @@
 <template>
   <base-layout>
-    <b-card-group columns>
-      <post v-for="post in posts" :key="post.id" :post="post" />
-    </b-card-group>
+    <b-container>
+      <template v-if="posts.length > 0">
+        <b-card-group columns>
+          <post v-for="post in posts" :key="post.id" :post="post" />
+        </b-card-group>
+      </template>
+      <template v-else>
+        <div class="text-center mt-5 pt-5 text-muted">
+          <font-awesome-icon icon="newspaper" size="10x" />
+          <p class="h3">No posts in this category</p>
+        </div>
+      </template>
+    </b-container>
   </base-layout>
 </template>
 
 <script>
-import BaseLayout from "../layouts/Base";
-import Post from "../components/Post";
+import BaseLayout from "@/layouts/Base";
+import Post from "@/components/Post";
 export default {
   components: {
     Post,
