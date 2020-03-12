@@ -1,19 +1,32 @@
 <template>
   <base-layout>
     <b-container class="mt-4">
-      <h1 class="mb-2">{{categories.length}} Categories</h1>
+      <h1 class="mb-3">Categories</h1>
 
-      <b-card-group columns>
-        <b-card v-for="cat in categories" :key="cat.id" bg-variant="secondary" text-variant="light">
-          <b-card-text class="text-center">
-            {{cat.name}}
-            <br />
-            <b-button @click="toggle_subscription(cat)">
-              <b-icon :icon="get_icon(cat)" />
-            </b-button>
-          </b-card-text>
-        </b-card>
-      </b-card-group>
+      <template v-if="loading">
+        <p>Loading categories...</p>
+      </template>
+      <template v-else>
+        <b-card-group columns>
+          <b-card
+            v-for="cat in categories"
+            :key="cat.id"
+            :bg-variant="is_subscribed(cat) ? 'primary' : 'secondary'"
+            text-variant="light"
+            :img-src="get_cat_image(cat)"
+            body-class="text-center pt-5"
+            :title="cat.name"
+            overlay
+          >
+            <b-button
+              @click="toggle_subscription(cat)"
+              :variant="is_subscribed(cat) ? 'secondary' : 'primary'"
+              size="sm"
+            >{{is_subscribed(cat) ? 'Subscribed' : 'Subscribe'}}</b-button>
+            <b-button size="sm" class="ml-2" :to="'/category/' + cat.name">Posts</b-button>
+          </b-card>
+        </b-card-group>
+      </template>
     </b-container>
   </base-layout>
 </template>
@@ -34,14 +47,13 @@ export default {
   },
   mounted() {
     this.fetch_categories();
+    if (this.user_id)
+      this.$bind("user", db.collection("users").doc(this.user_id));
   },
   watch: {
     user_id() {
-      this.$bind("user", db.collection("users").doc(this.user_id));
-    },
-    user() {
-      //eslint-disable-next-line
-      console.log(this.user, "from watch");
+      if (this.user_id)
+        this.$bind("user", db.collection("users").doc(this.user_id));
     }
   },
   computed: {
@@ -50,6 +62,9 @@ export default {
     },
     subscribed_categories() {
       return this.user && this.user.categories;
+    },
+    loading() {
+      return this.user == null || this.user.categories === undefined;
     }
   },
   methods: {
@@ -66,13 +81,12 @@ export default {
         }
       );
     },
-    get_icon(cat) {
-      if (!this.subscribed_categories) return "heart";
-      return this.subscribed_categories.indexOf(cat.name) == -1
-        ? "heart"
-        : "heart-fill";
+    is_subscribed(cat) {
+      if (!this.subscribed_categories) return false;
+      return this.subscribed_categories.indexOf(cat.name) != -1;
     },
     toggle_subscription(cat) {
+      if (!this.user) return;
       let user_ref = db.collection("users").doc(this.user_id);
 
       if (this.user.categories.indexOf(cat.name) == -1) {
@@ -84,7 +98,19 @@ export default {
           categories: firebase.firestore.FieldValue.arrayRemove(cat.name)
         });
       }
+    },
+    get_cat_image(cat) {
+      if (cat.image) {
+        return cat.image;
+      }
+      return "./cat_placeholder.png";
     }
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.card-body {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+</style>

@@ -8,8 +8,8 @@
     </b-carousel>
 
     <b-container fluid="md">
-      <b-row>
-        <b-col md="2" class="d-sm-none d-md-block mt-4">
+      <b-row class="mt-4">
+        <b-col sm="0" md="2" class="d-none d-md-block">
           <h5>Top Categories</h5>
           <b-list-group>
             <b-list-group-item

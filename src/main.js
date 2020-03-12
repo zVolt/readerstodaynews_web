@@ -17,7 +17,7 @@ import { firestorePlugin } from 'vuefire'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCircle, faHammer } from '@fortawesome/free-solid-svg-icons'
+import { faCircle, faHammer, faNewspaper } from '@fortawesome/free-solid-svg-icons'
 import { faFacebookSquare, faTwitterSquare } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome'
 import moment from 'vue-moment';
@@ -37,12 +37,12 @@ Vue.use(firestorePlugin)
 
 Vue.filter('numFormat', numFormat(numeral))
 
-Vue.axios.defaults.baseURL = 'http://localhost:8000/api/'
+Vue.axios.defaults.baseURL = process.env.VUE_APP_API_BACKEND_BASE_URL
 Vue.axios.defaults.params = {}
 axios.defaults.params['format'] = 'json'
 
 // font-awesome icons
-library.add(faFacebookSquare, faTwitterSquare, faCircle, faHammer)
+library.add(faFacebookSquare, faTwitterSquare, faCircle, faHammer, faNewspaper)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('font-awesome-layers', FontAwesomeLayers)
 
