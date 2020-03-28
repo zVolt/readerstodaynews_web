@@ -18,12 +18,14 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCircle, faHammer, faNewspaper } from '@fortawesome/free-solid-svg-icons'
-import { faFacebookSquare, faTwitterSquare } from '@fortawesome/free-brands-svg-icons'
+import { faFacebookSquare, faTwitter, faInstagram, faGooglePlus } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome'
 import moment from 'vue-moment';
 
 import './custom.scss'
 import { config } from './helpers/firebaseConfig'
+
+
 
 Vue.config.productionTip = false
 
@@ -42,7 +44,7 @@ Vue.axios.defaults.params = {}
 axios.defaults.params['format'] = 'json'
 
 // font-awesome icons
-library.add(faFacebookSquare, faTwitterSquare, faCircle, faHammer, faNewspaper)
+library.add(faFacebookSquare, faTwitter, faCircle, faHammer, faNewspaper, faInstagram, faGooglePlus)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('font-awesome-layers', FontAwesomeLayers)
 
