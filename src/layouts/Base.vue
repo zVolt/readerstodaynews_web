@@ -1,50 +1,103 @@
 <template>
   <div class="main-container">
-    <menu-component></menu-component>
+    <trending-top-bar></trending-top-bar>
     <div id="contentsection">
-      <slot></slot>
+      <div class="header">
+        <b-container class="text-center">
+          <b-row>
+            <b-col>
+              <b-img
+                src="https://res.cloudinary.com/readerstodaymedia/image/upload/v1585399771/web_images/header_old.jpg"
+                height="200px"
+              />
+            </b-col>
+            <b-col class="d-none d-lg-block">
+              <b-img
+                src="http://www.readerstodaynews.com/wp-content/uploads/2017/10/unnamed-3.jpg"
+                fluid
+                style="margin-top: 50px"
+              />
+            </b-col>
+          </b-row>
+        </b-container>
+      </div>
+      <categories-bar />
+      <b-container>
+        <b-row>
+          <b-col>
+            <slot></slot>
+          </b-col>
+          <b-col class="d-none d-md-inline" md="4" sm="4">
+            <updates-section />
+          </b-col>
+        </b-row>
+      </b-container>
     </div>
     <footer-component class="footer"></footer-component>
   </div>
 </template>
 
 <script>
-import FooterComponent from '@/components/Footer'
-import MenuComponent from '@/components/Menu'
+import FooterComponent from "@/components/Footer";
+import CategoriesBar from "@/components/CategoriesBar";
+import TrendingTopBar from "@/components/TrendingTopBar";
+import UpdatesSection from "@/components/UpdatesSection";
+
 export default {
-  name: 'baselayout',
+  name: "baselayout",
   components: {
     FooterComponent,
-    MenuComponent
+    TrendingTopBar,
+    CategoriesBar,
+    UpdatesSection
   }
-}
+};
 </script>
 
 
-<style lang="css">
+<style lang="scss">
+.header {
+  background-color: black;
+}
 * {
- box-sizing: border-box;
+  box-sizing: border-box;
 }
 *:before,
 *:after {
- box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   position: relative;
 }
 .main-container {
- min-height: 100vh; /* will cover the 100% of viewport */
- overflow: hidden;
- display: block;
- position: relative;
- padding-bottom: 400px; /* height of your footer */
+  min-height: 100vh; /* will cover the 100% of viewport */
+  overflow: hidden;
+  display: block;
+  position: relative;
+  @media (min-width: 0px) {
+    /* Target devices wider than 0px. */
+    padding-bottom: 1000px; /* height of your footer */
+  }
+  @media (min-width: 230px) {
+    /* Target devices wider than 0px. */
+    padding-bottom: 710px; /* height of your footer */
+  }
+  @media (min-width: 460px) {
+    /* Target devices wider than 0px. */
+    padding-bottom: 750px; /* height of your footer */
+  }
+  @media (min-width: 767px) {
+    /* Target devices wider than 768px. */
+    padding-bottom: 400px; /* height of your footer */
+  }
 }
 
 .footer {
- position: absolute;
- bottom: 0;
- width: 100%;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 </style>
