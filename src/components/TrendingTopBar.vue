@@ -1,7 +1,7 @@
 <template>
   <b-container class="text-light bg-dark" fluid>
     <b-container class="p-2">
-      <div class="heading text-uppercase font-weight-bold mr-3 d-inline">{{category_to_fetch}}</div>
+      <div class="heading text-uppercase font-weight-bold mr-5 pr-2 d-inline">{{category_to_fetch}}</div>
       <agile ref="trending_agile" :options="agile_options" v-if="trending_items" class="d-inline">
         <span v-for="item in trending_items" :key="item.id">
           <router-link
@@ -49,7 +49,11 @@ export default {
   }
 };
 </script>
-<style lang="sass" scoped>
-.agile
-  position: absolute
+<style lang="scss" scoped>
+.agile {
+  position: absolute;
+}
+.heading {
+  font-size: 0.9em;
+}
 </style>

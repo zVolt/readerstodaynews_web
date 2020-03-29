@@ -82,6 +82,9 @@ export default {
       .collection("comments");
   },
   computed: {
+    comment_count() {
+      return this.comments.length;
+    },
     disable_editing() {
       return !this.user.logged_in;
     },
@@ -90,6 +93,9 @@ export default {
     })
   },
   watch: {
+    comment_count(value) {
+      this.$emit("commentCountChanged", value);
+    },
     post_id: {
       immediate: true,
       handler(post_id) {
@@ -113,7 +119,7 @@ export default {
     },
     get_comments_count() {
       let count = this.comments ? this.comments.length : "No";
-      return this.pluralize(count, "Thought");
+      return this.pluralize(count, "Comment");
     },
     get_comment_timestamp(comment) {
       return comment.last_updated_on && comment.last_updated_on.toDate();
