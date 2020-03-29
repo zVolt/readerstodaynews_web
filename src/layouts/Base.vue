@@ -13,7 +13,7 @@
             </b-col>
             <b-col class="d-none d-lg-block">
               <b-img
-                src="http://www.readerstodaynews.com/wp-content/uploads/2017/10/unnamed-3.jpg"
+                src="https://res.cloudinary.com/readerstodaymedia/image/upload/v1585456072/web_images/banner_long.jpg"
                 fluid
                 style="margin-top: 50px"
               />

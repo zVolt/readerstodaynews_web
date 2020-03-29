@@ -2,7 +2,9 @@
   <div>
     <b-container fluid>
       <b-row class="section">
-        <b-img src="http://www.readerstodaynews.com/wp-content/uploads/2017/10/unnamed-4.jpg" />
+        <b-img
+          src="https://res.cloudinary.com/readerstodaymedia/image/upload/v1585456071/web_images/banner_square.jpg"
+        />
       </b-row>
       <b-row class="section">
         <b-tabs
