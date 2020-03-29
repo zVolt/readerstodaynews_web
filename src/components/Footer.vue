@@ -54,7 +54,7 @@
         </b-col>
       </b-row>
     </b-container>
-    <div class="copyrights" fluid>
+    <div class="copyrights mt-5" fluid>
       <b-container id="copyrights-content">
         <b-row>
           <b-col class="text-left">

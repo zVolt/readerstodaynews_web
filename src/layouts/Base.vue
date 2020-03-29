@@ -7,13 +7,15 @@
           <b-row>
             <b-col>
               <b-img
+                class="float-left"
                 src="https://res.cloudinary.com/readerstodaymedia/image/upload/v1585399771/web_images/header_old.jpg"
                 height="200px"
               />
             </b-col>
-            <b-col class="d-none d-lg-block">
+            <b-col class="d-none d-lg-inline" col lg="8">
               <b-img
-                src="http://www.readerstodaynews.com/wp-content/uploads/2017/10/unnamed-3.jpg"
+                class="float-right"
+                src="https://res.cloudinary.com/readerstodaymedia/image/upload/v1585456072/web_images/banner_long.jpg"
                 fluid
                 style="margin-top: 50px"
               />
@@ -24,10 +26,10 @@
       <categories-bar />
       <b-container>
         <b-row>
-          <b-col>
+          <b-col col lg="8" md="8">
             <slot></slot>
           </b-col>
-          <b-col class="d-none d-md-inline" md="4" sm="4">
+          <b-col col lg="4" md="4">
             <updates-section />
           </b-col>
         </b-row>
