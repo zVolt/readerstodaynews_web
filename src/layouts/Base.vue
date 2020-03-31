@@ -1,5 +1,6 @@
 <template>
   <div class="main-container">
+    <login />
     <trending-top-bar></trending-top-bar>
     <div id="contentsection">
       <div class="header">
@@ -26,10 +27,10 @@
       <categories-bar />
       <b-container>
         <b-row>
-          <b-col col lg="8" md="8">
+          <b-col cols="12" md="8">
             <slot></slot>
           </b-col>
-          <b-col col lg="4" md="4">
+          <b-col cols="12" md="4">
             <updates-section />
           </b-col>
         </b-row>
@@ -40,6 +41,7 @@
 </template>
 
 <script>
+import Login from "@/components/Login";
 import FooterComponent from "@/components/Footer";
 import CategoriesBar from "@/components/CategoriesBar";
 import TrendingTopBar from "@/components/TrendingTopBar";
@@ -48,6 +50,7 @@ import UpdatesSection from "@/components/UpdatesSection";
 export default {
   name: "baselayout",
   components: {
+    Login,
     FooterComponent,
     TrendingTopBar,
     CategoriesBar,
@@ -93,7 +96,7 @@ body {
   }
   @media (min-width: 767px) {
     /* Target devices wider than 768px. */
-    padding-bottom: 400px; /* height of your footer */
+    padding-bottom: 500px; /* height of your footer */
   }
 }
 

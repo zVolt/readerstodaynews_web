@@ -3,52 +3,49 @@
     <b-container>
       <b-row>
         <b-col md>
-          <h5 class="text-white section-header text-uppercase">About</h5>
+          <h5 class="text-white section-header text-uppercase font-weight-bold">About</h5>
           <div>
-            <p class="logo-header">
+            <p class="logo-header font-weight-bold">
               READERS
-              <span class="text-danger">TODAY</span>
+              <span class="text-danger" style="margin-left:-4px">TODAY</span>
             </p>
           </div>
           <p>Readers Today News is a subsidiary of Readers Today Print Media, a leading company focused on un-biased and comprehensive news and entertainment program in India and abroad.</p>
 
           <p>Subscribe to our newsletter:</p>
-          <b-input-group>
-            <b-form-input size="sm" type="email" placeholder="Email Address" />
+          <b-input-group size="sm">
+            <b-form-input type="email" placeholder="Email Address" class="bg-dark text-light" />
             <b-input-group-append>
-              <b-button size="sm">Submit</b-button>
+              <b-button variant="secondary">Submit</b-button>
             </b-input-group-append>
           </b-input-group>
         </b-col>
         <b-col md>
-          <h5 class="text-white section-header text-uppercase">Popular Posts</h5>
+          <h5 class="text-white section-header text-uppercase font-weight-bold">Popular Posts</h5>
         </b-col>
         <b-col md>
-          <h5 class="text-white section-header text-uppercase">Find us on</h5>
+          <h5 class="text-white section-header text-uppercase font-weight-bold">Find us on</h5>
 
-          <b-button
-            class="social facebook text-left"
-            href="https://www.facebook.com/readerstodaynews"
-          >
+          <a class="social facebook text-left" href="https://www.facebook.com/readerstodaynews">
             <span class="icon">
               <font-awesome-icon :icon="['fab', 'facebook-square']" />
             </span>
-            Like on Facebook
-          </b-button>
+            <span class="label">Like on Facebook</span>
+          </a>
 
-          <b-button class="social twitter text-left" href="https://twitter.com/readerstoday1">
+          <a class="social twitter text-left" href="https://twitter.com/readerstoday1">
             <span class="icon">
               <font-awesome-icon :icon="['fab', 'twitter']" />
             </span>
-            Follow on Twitter
-          </b-button>
+            <span class="label">Follow on Twitter</span>
+          </a>
 
-          <b-button class="social google text-left" href="https://plus.google.com/">
+          <a class="social google text-left" href="https://plus.google.com/">
             <span class="icon">
               <font-awesome-icon :icon="['fab', 'google-plus']" />
             </span>
-            Like on Google+
-          </b-button>
+            <span class="label">Like on Google+</span>
+          </a>
 
           <div class="badge badge-danger text-wrap">{{this.count}} Visitors</div>
         </b-col>
@@ -102,25 +99,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$text-color: #c5c7cb;
+$text-size: 13px;
+$text-big-szie: 14px;
+$text-header: 22px;
+
 .list-item-footer {
   margin-right: 5px;
   margin-left: 5px;
-  color: #c5c7cb !important;
+  color: $text-color !important;
 }
 #footer {
-  font-size: 13px;
-  color: #c5c7cb !important;
+  line-height: 1.9;
+  font-size: $text-size;
+  color: $text-color !important;
   .section-header {
-    color: #c5c7cb !important;
     margin-top: 28px;
     margin-bottom: 28px;
-    font-weight: bold;
-    font-size: 1.2em;
+    font-size: $text-big-szie;
     border-bottom: 2px solid #253443;
     padding-bottom: 5px;
   }
   .logo-header {
-    font-size: 1.5em;
+    font-size: $text-header;
     margin-bottom: 28px;
   }
 }
@@ -132,12 +133,31 @@ export default {
   padding-bottom: 20px;
 }
 .social {
-  border: none;
+  display: block;
+  padding-right: 12px;
+  line-height: 35px;
+  border-radius: 2px;
+  color: #e0e3e9;
+  text-decoration: none;
+  transition: all 0.4s ease-in-out;
   margin-bottom: 10px;
-  width: 100%;
+  font-size: 12px;
+  font-weight: 600;
   .icon {
-    padding: 5px;
-    // border-right: 1px solid grey;
+    float: left;
+    width: 38px;
+    background: rgba(0, 0, 0, 0.07);
+    font-size: 15px;
+    line-height: inherit;
+    text-align: center;
+  }
+  .label {
+    display: inline-block;
+    margin-left: 14px;
+  }
+  :hover {
+    text-decoration: none;
+    opacity: 0.88;
   }
 }
 .google {

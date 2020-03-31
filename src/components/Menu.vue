@@ -14,10 +14,7 @@
 
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
-        <template v-if="!user.logged_in">
-          <b-nav-item v-b-modal="'modal-login'">Login</b-nav-item>
-        </template>
-        <template v-else>
+        <template v-if="user.logged_in">
           <b-img
             :src="get_user_photo_url()"
             rounded="circle"
@@ -26,27 +23,15 @@
             :alt="user.name"
             :title="user.name"
           />
-          <b-nav-item @click="sign_out">Logout</b-nav-item>
         </template>
       </b-navbar-nav>
     </b-collapse>
-    <b-modal
-      id="modal-login"
-      :static="true"
-      @show="start_login"
-      :hide-footer="true"
-      title="Readers Today News"
-    >
-      <div id="firebaseui-auth-container"></div>
-    </b-modal>
   </b-navbar>
 </template>
 
 <script>
-import * as firebase from "firebase";
 import { mapGetters } from "vuex";
 import * as md5 from "js-md5";
-import { auth_ui } from "@/main";
 export default {
   data() {
     return {
@@ -85,21 +70,7 @@ export default {
         }
       );
     },
-    start_login() {
-      var uiConfig = {
-        signInFlow: "popup",
-        signInSuccessUrl: this.$route.path,
-        signInOptions: [
-          firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-          firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-          firebase.auth.TwitterAuthProvider.PROVIDER_ID
-        ]
-      };
-      auth_ui.start("#firebaseui-auth-container", uiConfig);
-    },
-    sign_out() {
-      firebase.auth().signOut();
-    },
+
     get_user_photo_url() {
       if (this.user.image) return this.user.image;
 
