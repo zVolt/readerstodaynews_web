@@ -40,14 +40,18 @@
           <h5 class="section-head m-0 p-2 font-weight-bold">RELATED POSTS</h5>
           <b-row class="mt-4">
             <b-col v-for="rpost in related_posts_three" :key="rpost.id" col md="4" lg="4">
-              <b-img-lazy :src="get_image(rpost)" />
+              <router-link :to="{name: 'post_by_slug', params: {slug: rpost.slug}}">
+                <b-img-lazy height="110px" :src="get_image(rpost)" />
+              </router-link>
               <div class="related-post-header">
                 <span class="float-right pr-2">
                   <font-awesome-icon size="xs" :icon="['fa', 'comments']" />
                 </span>
                 <p class="p-1">{{rpost.last_modified_on | moment('MMMM DD, YYYY')}}</p>
               </div>
-              <div class="related-post-title pl-2">{{rpost.title}}</div>
+              <router-link :to="{name: 'post_by_slug', params: {slug: rpost.slug}}">
+                <div class="related-post-title pl-2 text-body">{{rpost.title}}</div>
+              </router-link>
             </b-col>
           </b-row>
         </section>
@@ -139,6 +143,9 @@ export default {
     };
   },
   computed: {
+    slug() {
+      return this.$route.params.slug;
+    },
     related_posts_three() {
       var posts = [];
       this.related_posts.forEach(post => {
@@ -158,6 +165,11 @@ export default {
         return this.post.media_items[0].image;
       }
       return null;
+    }
+  },
+  watch: {
+    slug() {
+      this.fetch_post();
     }
   },
   mounted() {
@@ -193,8 +205,9 @@ export default {
       );
     },
     fetch_post() {
+      this.related_posts.splice(0, this.related_posts.length);
       this.axios
-        .get("post/" + this.$route.params.slug)
+        .get("post/" + this.slug)
         .then(
           response => {
             this.post = response.data;

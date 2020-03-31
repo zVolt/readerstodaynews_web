@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import * as firebase from "firebase";
+import firebase from "firebase/app";
 import BaseLayout from "@/layouts/Base";
 import { db } from "@/main";
 export default {

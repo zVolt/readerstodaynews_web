@@ -55,24 +55,38 @@
         </div>
       </template>
       <template v-else>
-        <p>Please login to add throughts</p>
+        <p>
+          Please
+          <b-link @click="trigger_login_action">login</b-link>to add throughts
+        </p>
       </template>
     </div>
+    <login
+      :initiate_login="login_action"
+      v-on:login_initiated="initiate_complete"
+      v-on:logged_in="logged_in_hook"
+    />
   </div>
 </template>
 
 <script>
-import * as firebase from "firebase";
+import firebase from "firebase/app";
 import { db } from "@/main";
 import { mapGetters } from "vuex";
+import Login from "@/components/Login";
 export default {
+  components: {
+    Login
+  },
   props: ["post_id"],
   data() {
     return {
       comment_text: "",
       comments_loading: true,
       comments: [],
-      comments_ref: null
+      comments_ref: null,
+      login_action: false,
+      renderComponent: false
     };
   },
   mounted() {
@@ -112,6 +126,18 @@ export default {
     }
   },
   methods: {
+    logged_in_hook() {
+      //eslint-disable-next-line
+      console.log("tada", this.user);
+    },
+    trigger_login_action() {
+      this.login_action = true;
+      //eslint-disable-next-line
+      console.log("tada");
+    },
+    initiate_complete() {
+      this.login_action = false;
+    },
     pluralize(num, singular_name) {
       if (num == 0) return "No " + singular_name + "s";
       if (num == 1) return "1 " + singular_name;
