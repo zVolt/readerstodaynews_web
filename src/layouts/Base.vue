@@ -1,6 +1,5 @@
 <template>
   <div class="main-container">
-    <login />
     <trending-top-bar></trending-top-bar>
     <div id="contentsection">
       <div class="header">
@@ -41,7 +40,6 @@
 </template>
 
 <script>
-import Login from "@/components/Login";
 import FooterComponent from "@/components/Footer";
 import CategoriesBar from "@/components/CategoriesBar";
 import TrendingTopBar from "@/components/TrendingTopBar";
@@ -50,7 +48,6 @@ import UpdatesSection from "@/components/UpdatesSection";
 export default {
   name: "baselayout",
   components: {
-    Login,
     FooterComponent,
     TrendingTopBar,
     CategoriesBar,

@@ -31,53 +31,48 @@
           </div>
         </b-media>
       </ul>
+      <div class="mt-5">
+        <template v-if="user.logged_in">
+          <small>
+            commenting as
+            <b>{{user.name}}</b>
+          </small>
+          <div>
+            <b-form-textarea
+              v-model="comment_text"
+              placeholder="Add your thoughts?"
+              :disabled="disable_editing"
+            ></b-form-textarea>
+            <br />
+            <b-button
+              type="submit"
+              variant="success"
+              @click="sumbit_comment"
+              :disabled="disable_editing"
+            >Send</b-button>
+          </div>
+        </template>
+        <template v-else>
+          <p>
+            Please
+            <b-link @click="show_login=true" class="mr-1">login</b-link>to add throughts
+          </p>
+        </template>
+      </div>
     </template>
 
-    <div class="mt-5">
-      <template v-if="user.logged_in">
-        <small>
-          commenting as
-          <b>{{user.name}}</b>
-        </small>
-        <div>
-          <b-form-textarea
-            v-model="comment_text"
-            placeholder="Add your thoughts?"
-            :disabled="disable_editing"
-          ></b-form-textarea>
-          <br />
-          <b-button
-            type="submit"
-            variant="success"
-            @click="sumbit_comment"
-            :disabled="disable_editing"
-          >Send</b-button>
-        </div>
-      </template>
-      <template v-else>
-        <p>
-          Please
-          <b-link @click="trigger_login_action">login</b-link>to add throughts
-        </p>
-      </template>
-    </div>
-    <login
-      :initiate_login="login_action"
-      v-on:login_initiated="initiate_complete"
-      v-on:logged_in="logged_in_hook"
-    />
+    <login :show="show_login" v-on:login_started="reset_show_login" />
   </div>
 </template>
 
 <script>
+import Login from "@/components/Login";
 import firebase from "firebase/app";
+import "firebase/firestore";
 import { db } from "@/main";
 import { mapGetters } from "vuex";
-import Login from "@/components/Login";
 export default {
-  components: {
-    Login
-  },
+  components: { Login },
   props: ["post_id"],
   data() {
     return {
@@ -85,8 +80,7 @@ export default {
       comments_loading: true,
       comments: [],
       comments_ref: null,
-      login_action: false,
-      renderComponent: false
+      show_login: false
     };
   },
   mounted() {
@@ -126,17 +120,8 @@ export default {
     }
   },
   methods: {
-    logged_in_hook() {
-      //eslint-disable-next-line
-      console.log("tada", this.user);
-    },
-    trigger_login_action() {
-      this.login_action = true;
-      //eslint-disable-next-line
-      console.log("tada");
-    },
-    initiate_complete() {
-      this.login_action = false;
+    reset_show_login() {
+      this.show_login = false;
     },
     pluralize(num, singular_name) {
       if (num == 0) return "No " + singular_name + "s";
