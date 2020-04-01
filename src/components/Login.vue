@@ -1,51 +1,49 @@
 <template>
   <b-modal
     :static="true"
-    @show="start_login"
+    @show="start_firebaseui"
     :hide-footer="true"
-    v-model="show"
+    v-model="show_modal"
     title="Readers Today News"
   >
-    <div id="firebaseui-auth-container"></div>
+    <div id="firebaseui-auth"></div>
   </b-modal>
 </template>
 <script>
 import firebase from "firebase/app";
+import "firebase/app";
+import "firebase/auth";
 import { auth_ui } from "@/main";
 export default {
-  props: ["initiate_login"],
+  props: ["show"],
   data() {
     return {
-      show: false
+      show_modal: false
     };
   },
   watch: {
-    initiate_login(value) {
+    show(value) {
       if (value) {
-        this.show = true;
-        this.$emit("login_initiated");
+        this.show_modal = true;
       }
     }
   },
   methods: {
-    start_login() {
+    start_firebaseui() {
       var uiConfig = {
         signInFlow: "popup",
         signInSuccessUrl: this.$route.path,
+        tosUrl: "https://google.com",
+        privacyPolicyUrl: "https://google.com",
         signInOptions: [
           firebase.auth.GoogleAuthProvider.PROVIDER_ID,
           firebase.auth.FacebookAuthProvider.PROVIDER_ID,
           firebase.auth.TwitterAuthProvider.PROVIDER_ID
         ]
       };
-      auth_ui.start("#firebaseui-auth-container", uiConfig);
+      auth_ui.start("#firebaseui-auth", uiConfig);
       //eslint-disable-next-line
-      console.log("start_login", uiConfig);
-      this.$emit("logged_in");
-    },
-    sign_out() {
-      firebase.auth().signOut();
-      this.$emit("logged_out");
+      console.log("login_started", uiConfig);
     }
   }
 };

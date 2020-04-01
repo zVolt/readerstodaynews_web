@@ -8,9 +8,10 @@ import store from './store'
 import numeral from 'numeral';
 import numFormat from 'vue-filter-number-format';
 import firebase from "firebase/app";
-import * as firebaseui from 'firebaseui'
+import 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
+import * as firebaseui from 'firebaseui'
 import SocialSharing from 'vue-social-sharing';
 
 import { firestorePlugin } from 'vuefire'
