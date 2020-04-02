@@ -1,25 +1,32 @@
 <template>
   <base-layout>
-    <b-container fluid="md">
-      <b-row class="mt-4">
-        <b-col sm="12" md="10">
-          <b-card-group columns>
-            <post v-for="post in posts" :key="post.id" :post="post" />
-          </b-card-group>
-        </b-col>
-      </b-row>
-    </b-container>
+    <template v-slot:header>
+      <carousel-section />
+    </template>
+    <template v-slot:content>
+      <b-container fluid="md">
+        <b-row class="mt-4">
+          <b-col sm="12" md="10">
+            <b-card-group columns>
+              <post v-for="post in posts" :key="post.id" :post="post" />
+            </b-card-group>
+          </b-col>
+        </b-row>
+      </b-container>
+    </template>
   </base-layout>
 </template>
 
 <script>
 import BaseLayout from "@/layouts/Base";
 import Post from "@/components/Post";
+import CarouselSection from "@/components/CarouselSection";
 export default {
   name: "home",
   components: {
     BaseLayout,
-    Post
+    Post,
+    CarouselSection
   },
   data() {
     return {
