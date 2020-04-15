@@ -25,9 +25,10 @@
       </div>
       <categories-bar />
       <b-container>
+        <slot name="header" />
         <b-row>
           <b-col cols="12" md="8">
-            <slot></slot>
+            <slot name="content" />
           </b-col>
           <b-col cols="12" md="4">
             <updates-section />
