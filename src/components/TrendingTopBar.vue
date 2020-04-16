@@ -2,7 +2,7 @@
   <b-container class="text-light bg-dark" fluid>
     <b-container class="p-2">
       <div class="heading text-uppercase font-weight-bold mr-5 pr-2 d-inline">{{category_to_fetch}}</div>
-      <agile ref="trending_agile" :options="agile_options" v-if="trending_items" class="d-inline">
+      <agile :options="agile_options" v-if="trending_items" class="d-inline">
         <span v-for="item in trending_items" :key="item.id">
           <router-link
             :to="{name: 'post_by_slug', params: {'slug': item.slug}}"
@@ -35,10 +35,10 @@ export default {
   },
   methods: {
     load_trending_posts() {
-      let vm = this;
       this.axios.get("/post/?categories__name=" + this.category_to_fetch).then(
         response => {
-          vm.trending_items = response.data.results;
+          if (response.data.results.length > 0)
+            this.trending_items = response.data.results;
         },
         error => {
           //eslint-disable-next-line

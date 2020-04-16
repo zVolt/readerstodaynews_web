@@ -2,7 +2,7 @@
   <b-row>
     <b-col md="8">
       <div class="flexslider">
-        <agile :options="agile_options">
+        <agile :options="agile_options" v-if="posts">
           <div class="slide" v-for="post in posts" :key="post.id">
             <h3>{{ post.title }}</h3>
           </div>
@@ -23,7 +23,7 @@ import { VueAgile } from "vue-agile";
 export default {
   data() {
     return {
-      posts: [],
+      posts: null,
       agile_options: {
         autoplay: true,
         navButtons: false,

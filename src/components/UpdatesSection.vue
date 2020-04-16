@@ -153,7 +153,13 @@ export default {
           params: { media_type: 1, ordering: "-last_modified_on" }
         })
         .then(response => {
-          this.gallery_items = response.data.results;
+          let gallery_items = [];
+          response.data.results.forEach(item => {
+            if (item.image) gallery_items.push(item);
+          });
+          //eslint-disable-next-line
+          console.log("gallery_items", gallery_items);
+          this.gallery_items = gallery_items;
         });
     },
     load_recent_posts() {
