@@ -25,9 +25,7 @@
       </div>
       <categories-bar />
       <b-container>
-        <b-row>
-          <slot name="header" />
-        </b-row>
+        <slot name="header" />
         <b-row>
           <b-col cols="12" md="8">
             <slot name="content" />
