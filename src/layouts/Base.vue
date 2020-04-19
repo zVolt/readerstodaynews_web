@@ -31,7 +31,7 @@
             <slot name="content" />
           </b-col>
           <b-col cols="12" md="4">
-            <updates-section />
+            <sidebar />
           </b-col>
         </b-row>
       </b-container>
@@ -44,7 +44,7 @@
 import FooterComponent from "@/components/Footer";
 import CategoriesBar from "@/components/CategoriesBar";
 import TrendingTopBar from "@/components/TrendingTopBar";
-import UpdatesSection from "@/components/UpdatesSection";
+import Sidebar from "@/components/Sidebar";
 
 export default {
   name: "baselayout",
@@ -52,7 +52,7 @@ export default {
     FooterComponent,
     TrendingTopBar,
     CategoriesBar,
-    UpdatesSection
+    Sidebar
   }
 };
 </script>

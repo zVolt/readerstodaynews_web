@@ -1,67 +1,68 @@
 <template>
   <base-layout>
-    <b-container class="mt-4">
-      <template v-if="loading">
-        <div class="text-center align-middle">
-          <b-spinner variant="primary" label="Text Centered"></b-spinner>
-          <div>Loading...</div>
+    <template v-slot:content>
+      <b-container class="mt-4">
+        <div v-if="loading">
+          <div class="text-center align-middle">
+            <b-spinner variant="primary" label="Text Centered"></b-spinner>
+            <div>Loading...</div>
+          </div>
         </div>
-      </template>
-      <template v-else>
-        <div class="main-img">
-          <a class="blur" :href="image"></a>
+        <div v-else>
+          <div class="main-img">
+            <a class="blur" :href="image"></a>
+            <b-img-lazy responsive :src="image" />
+          </div>
+          <div>
+            <p class="float-right text-muted font-small">
+              <font-awesome-icon size="xs" :icon="['fa', 'comments']" />
+              {{comment_count}}
+            </p>
+            <h4 class="heading mt-4 pl-4">{{post.title}}</h4>
+          </div>
+          <div class="info py-2 mt-3 text-muted">
+            <b-row>
+              <b-col>
+                <p
+                  class="text-uppercase"
+                >by admin on {{post.last_modified_on | moment('MMMM DD, YYYY') }}</p>
+              </b-col>
+              <b-col></b-col>
+            </b-row>
+          </div>
 
-          <b-img-lazy responsive :src="image" />
-        </div>
-        <div>
-          <p class="float-right text-muted font-small">
-            <font-awesome-icon size="xs" :icon="['fa', 'comments']" />
-            {{comment_count}}
-          </p>
-          <h4 class="heading mt-4 pl-4">{{post.title}}</h4>
-        </div>
-        <div class="info py-2 mt-3 text-muted">
-          <b-row>
-            <b-col>
-              <p
-                class="text-uppercase"
-              >by admin on {{post.last_modified_on | moment('MMMM DD, YYYY') }}</p>
-            </b-col>
-            <b-col></b-col>
-          </b-row>
-        </div>
+          <b-badge v-for="cat in post.categories" :key="cat.id" :to="'/category/' + cat.name" />
+          <br />
+          <p>{{post.content}}</p>
+          <hr />
+          <share-bar :title="post.title" :url="$route.url" :desc="post.content" />
+          <section class="related-posts mt-5">
+            <h5 class="section-head m-0 p-2 font-weight-bold">RELATED POSTS</h5>
+            <b-row class="mt-4">
+              <b-col v-for="rpost in related_posts_three" :key="rpost.id" col md="4" lg="4">
+                <router-link :to="{name: 'post_by_slug', params: {slug: rpost.slug}}">
+                  <b-img-lazy height="110px" :src="get_image(rpost)" />
+                </router-link>
+                <div class="related-post-header">
+                  <span class="float-right pr-2">
+                    <font-awesome-icon size="xs" :icon="['fa', 'comments']" />
+                  </span>
+                  <p class="p-1">{{rpost.last_modified_on | moment('MMMM DD, YYYY')}}</p>
+                </div>
+                <router-link :to="{name: 'post_by_slug', params: {slug: rpost.slug}}">
+                  <div class="related-post-title pl-2 text-body">{{rpost.title}}</div>
+                </router-link>
+              </b-col>
+            </b-row>
+          </section>
 
-        <b-badge v-for="cat in post.categories" :key="cat.id" :to="'/category/' + cat.name" />
-        <br />
-        <p>{{post.content}}</p>
-        <hr />
-        <share-bar :title="post.title" :url="$route.url" :desc="post.content" />
-        <section class="related-posts mt-5">
-          <h5 class="section-head m-0 p-2 font-weight-bold">RELATED POSTS</h5>
-          <b-row class="mt-4">
-            <b-col v-for="rpost in related_posts_three" :key="rpost.id" col md="4" lg="4">
-              <router-link :to="{name: 'post_by_slug', params: {slug: rpost.slug}}">
-                <b-img-lazy height="110px" :src="get_image(rpost)" />
-              </router-link>
-              <div class="related-post-header">
-                <span class="float-right pr-2">
-                  <font-awesome-icon size="xs" :icon="['fa', 'comments']" />
-                </span>
-                <p class="p-1">{{rpost.last_modified_on | moment('MMMM DD, YYYY')}}</p>
-              </div>
-              <router-link :to="{name: 'post_by_slug', params: {slug: rpost.slug}}">
-                <div class="related-post-title pl-2 text-body">{{rpost.title}}</div>
-              </router-link>
-            </b-col>
-          </b-row>
-        </section>
-
-        <section class="related-posts mt-5">
-          <h5 class="section-head m-0 p-2 font-weight-bold text-uppercase">Comments</h5>
-          <comments :post_id="post.slug" v-if="post" @commentCountChanged="comment_count_update" />
-        </section>
-      </template>
-    </b-container>
+          <section class="related-posts mt-5">
+            <h5 class="section-head m-0 p-2 font-weight-bold text-uppercase">Comments</h5>
+            <comments :post_id="post.slug" v-if="post" @commentCountChanged="comment_count_update" />
+          </section>
+        </div>
+      </b-container>
+    </template>
   </base-layout>
 </template>
 <style lang="scss" scoped>
@@ -136,7 +137,7 @@ export default {
   },
   data() {
     return {
-      post: null,
+      post: {},
       loading: true,
       comment_count: 0,
       related_posts: []
@@ -174,6 +175,8 @@ export default {
   },
   mounted() {
     this.fetch_post();
+    //eslint-disable-next-line
+    console.log("loading page");
   },
   methods: {
     get_image(post) {
@@ -192,26 +195,15 @@ export default {
         cat_names.push(cat.name);
       });
       var cat_name = cat_names.length > 0 ? cat_names[0] : "";
-      this.axios.get("post", { params: { categories__name: cat_name } }).then(
-        response => {
-          response.data.results.forEach(post => {
-            this.related_posts.push(post);
-          });
-        },
-        error => {
-          //eslint-disable-next-line
-          console.log(error);
-        }
-      );
-    },
-    fetch_post() {
-      this.related_posts.splice(0, this.related_posts.length);
       this.axios
-        .get("post/" + this.slug)
+        .get("post", { params: { categories__name: cat_name } })
         .then(
           response => {
-            this.post = response.data;
-            this.fetch_related_posts();
+            response.data.results.forEach(post => {
+              this.related_posts.push(post);
+            });
+            //eslint-disable-next-line
+            console.log("fetched related posts");
           },
           error => {
             //eslint-disable-next-line
@@ -221,6 +213,21 @@ export default {
         .finally(() => {
           this.loading = false;
         });
+    },
+    fetch_post() {
+      this.related_posts.splice(0, this.related_posts.length);
+      this.axios.get("post/" + this.slug).then(
+        response => {
+          this.post = response.data;
+          this.fetch_related_posts();
+          //eslint-disable-next-line
+          console.log("fetched posts", this.post);
+        },
+        error => {
+          //eslint-disable-next-line
+          console.log(error);
+        }
+      );
     }
   }
 };

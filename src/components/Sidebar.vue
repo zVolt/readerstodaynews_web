@@ -2,63 +2,44 @@
   <div>
     <b-container fluid>
       <b-row class="section">
-        <b-img
-          src="https://res.cloudinary.com/readerstodaymedia/image/upload/v1585456071/web_images/banner_square.jpg"
-        />
+        <ad />
       </b-row>
       <b-row class="section">
         <b-tabs content-class="mt-3" align="left" class="section_header" nav-class="text-uppercase">
           <b-tab title="Popular">
-            <sidebar-post-list :posts="popular" />
+            <post-list :posts="popular" />
           </b-tab>
           <b-tab title="Recent">
-            <sidebar-post-list :posts="recent" />
+            <post-list :posts="recent" />
           </b-tab>
         </b-tabs>
       </b-row>
       <b-row class="section gallery">
         <b-tabs
-          content-class="mt-3"
+          content-class="mt-1"
           align="left"
           class="section_header no-highlight"
           nav-class="text-uppercase"
         >
           <b-tab title="Latest Gallery">
-            <b-carousel :interval="4000" img-height="150" controls>
-              <b-carousel-slide
-                img-width="300"
-                img-height="150"
-                :img-src="media.image"
-                v-for="media in gallery_items"
-                :key="media.id"
-              />
-            </b-carousel>
+            <gallery :images="gallery_items" />
           </b-tab>
         </b-tabs>
       </b-row>
       <b-row class="section">
         <b-tabs
-          content-class="mt-3"
+          content-class="mt-1"
           align="left"
           class="section_header no-highlight recent-posts"
           nav-class="text-uppercase"
         >
           <b-tab title="Recent Posts">
-            <b-list-group>
-              <b-list-group-item
-                class="m-0 p-2 no-border"
-                v-for="post in recent"
-                :key="post.id"
-                :to="{name: 'post_by_slug', params: {slug: post.slug}}"
-              >{{post.summary | truncate(100)}}</b-list-group-item>
-            </b-list-group>
+            <post-text-list :posts="recent" />
           </b-tab>
         </b-tabs>
       </b-row>
       <b-row class="section">
-        <b-img
-          src="https://res.cloudinary.com/readerstodaymedia/image/upload/v1585456071/web_images/banner_square.jpg"
-        />
+        <ad />
       </b-row>
       <b-row class="section">
         <b-tabs
@@ -68,13 +49,7 @@
           nav-class="text-uppercase"
         >
           <b-tab title="Recent Comments">
-            <b-list-group>
-              <b-list-group-item
-                class="m-0 p-2 no-border"
-                v-for="comment in recent_comments"
-                :key="comment.id"
-              >{{comment.body | truncate(100)}}</b-list-group-item>
-            </b-list-group>
+            <recent-comments :comments="recent_comments" />
           </b-tab>
         </b-tabs>
       </b-row>
@@ -82,10 +57,14 @@
   </div>
 </template>
 <script>
-import SidebarPostList from "@/components/SidebarPostList";
+import PostList from "@/components/sidebar/PostList";
+import PostTextList from "@/components/sidebar/PostTextList";
+import RecentComments from "@/components/sidebar/RecentComments";
+import Gallery from "@/components/sidebar/Gallery";
+import Ad from "@/components/sidebar/Ad";
 import { db } from "@/main";
 export default {
-  components: { SidebarPostList },
+  components: { PostList, PostTextList, RecentComments, Gallery, Ad },
   data() {
     return {
       recent: null,
