@@ -3,11 +3,17 @@
     v-if="show_images"
     class="sidebar-gallery"
     :dots="false"
-    :speed="200"
+    :speed="300"
     :autoplay="true"
     :slides-to-show="1"
     :navButtons="true"
   >
+    <template slot="prevButton">
+      <font-awesome-icon color="white" size="2x" :icon="['fa', 'angle-left']" />
+    </template>
+    <template slot="nextButton">
+      <font-awesome-icon color="white" size="2x" :icon="['fa', 'angle-right']" />
+    </template>
     <div v-for="(media, index) in images" :key="media.id" class="slide" :class="`slide--${index}`">
       <div>
         <img :src="media.image" />
@@ -29,6 +35,10 @@
     position: absolute;
     top: 50%;
     width: 100%;
+    button {
+      background: none;
+      border: none;
+    }
   }
 }
 </style>

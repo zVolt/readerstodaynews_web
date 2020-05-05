@@ -4,7 +4,7 @@
       <b-col cols="12" lg="8">
         <agile
           v-if="posts"
-          :speed="200"
+          :speed="300"
           :dots="false"
           :autoplay="true"
           :slides-to-show="1"
