@@ -19,7 +19,7 @@ import { firestorePlugin } from 'vuefire'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCircle, faHammer, faNewspaper, faComments, faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { faCircle, faHammer, faNewspaper, faComments, faEnvelope, faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons'
 import { faFacebookSquare, faTwitter, faInstagram, faGooglePlus, faLinkedinIn, faWhatsapp, faPinterestP } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome'
 import moment from 'vue-moment';
@@ -51,7 +51,7 @@ axios.defaults.params['format'] = 'json'
 
 // font-awesome icons
 library.add(faFacebookSquare, faTwitter, faInstagram, faGooglePlus, faLinkedinIn, faWhatsapp, faPinterestP,
-  faCircle, faHammer, faNewspaper, faComments, faEnvelope)
+  faCircle, faHammer, faNewspaper, faComments, faEnvelope, faAngleRight, faAngleLeft)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('font-awesome-layers', FontAwesomeLayers)
 
